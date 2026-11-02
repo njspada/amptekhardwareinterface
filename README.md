@@ -25,3 +25,9 @@ With uv, add this checkout to your application:
 The build backend installs setuptools and NumPy in an isolated build
 environment. A C++ compiler, SWIG, and libusb development files must be
 installed on the build machine.
+
+The build generates the SWIG wrapper before copying Python modules into the
+wheel; generated wrapper files do not need to be committed. Verify installation
+with:
+
+    uv run python -c "from amptek_hardware_interface import AmptekHardwareInterface; print('Import OK')"
