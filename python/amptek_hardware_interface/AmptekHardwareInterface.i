@@ -26,20 +26,14 @@ namespace std {
    %template(UIntVector) vector<unsigned int>;
    %template(AmptekDataPair) pair<AmptekSpectrum, AmptekStatus>;
 }
-%except {
-	try {
-		$function
-	} catch(RangeError) {
-		SWIG_exception(SWIG_ValueError, "Range Error");
-	} catch(DivisionByZero) {
-		SWIG_exception(SWIG_DivisionByZero, "Division by zero");
-	} catch(OutOfMemory) {
-		SWIG_exception(SWIG_MemoryError, "Out of memory");
-	} catch(AmptekException) {
-		SWIG_exception(SWIG_RuntimeError, "Amptek Error");
-	} catch(...) {
-		SWIG_exception(SWIG_RuntimeError,"Unknown exception");
-	}
+%exception {
+    try {
+        $action
+    } catch (const AmptekException& e) {
+        SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (...) {
+        SWIG_exception(SWIG_RuntimeError, "Unknown exception");
+    }
 }
 
 %include "include/AmptekHardwareInterface.h"

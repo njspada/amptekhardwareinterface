@@ -18,8 +18,10 @@ Prerequisites
  
 Install
 -------
-Run
+With uv, add this checkout to your application:
 
-    python setup.py install
+    uv add /path/to/amptekhardwareinterface
 
-
+The build backend installs setuptools and NumPy in an isolated build
+environment. A C++ compiler, SWIG, and libusb development files must be
+installed on the build machine.
